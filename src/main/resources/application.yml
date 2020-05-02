@@ -21,8 +21,10 @@ spring:
   cloud:
     gateway:
       routes:
-      - id: lern-user
+      - id: user-service
         uri: lb://lern-user
         predicates:
-          - Path=/user-api/**
+        - Path=/user-api/**
+        filters:
+        - StripPrefix=1
          
