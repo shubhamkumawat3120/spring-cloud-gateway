@@ -18,3 +18,11 @@ eureka:
 spring:
   application:
     name: lern-gateway          
+  cloud:
+    gateway:
+      routes:
+      - id: lern-user
+        uri: lb://lern-user
+        predicates:
+          - Path=/user-api/**
+         
