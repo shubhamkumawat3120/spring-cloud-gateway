@@ -14,12 +14,27 @@ eureka:
   instance:
     hostname: localhost
     
-    
+
+#Logging configuration
+logging:
+  level:
+    org:
+      springframework:
+        cloud.gateway: DEBUG
+        http.server.reactive: DEBUG
+        web.reactive: DEBUG
+
+
+
+
+#Routing configuration    
 spring:
   application:
     name: lern-gateway          
   cloud:
     gateway:
+      default-filters:
+      - TokenRelay=
       routes:
       - id: user-service
         uri: lb://lern-user
@@ -28,3 +43,13 @@ spring:
         filters:
         - StripPrefix=1
          
+         
+#Oauth2 configuration         
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 71391643476-jon5ofuco7edjpcrvjfas52lklk3ejo3.apps.googleusercontent.com
+            client-secret: P9o09-lqkOhS34JSnzJmEaeq
+           # redirect-uri: http://localhost:8080/login/oauth2/code/google      
